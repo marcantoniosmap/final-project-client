@@ -33,7 +33,7 @@ export default function Login(props) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: { email: email, password:password}
+      body: JSON.stringify({ email: email, password:password})
     };
     console.log(email,password);
     console.log(requestOptions);

@@ -1,0 +1,19 @@
+@media all and (min-width: 480px) {
+    .Login {
+      width:100%;
+
+    }
+  
+    .Login form {
+      margin: 0 auto;
+      
+    }
+  }
+
+.height-max{
+  height: 100vh;
+  max-height: 100vh;
+}
+.overflow-none{
+  overflow: hidden;
+}

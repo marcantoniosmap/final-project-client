@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.CodeMirror {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+iframe{
+  height:100vh !important ;
+}
+.sandpack-CodeMirror__container {
+  resize: horizontal;
+  overflow: auto;
+  width: 100px !important;
+  min-width: 100px;
+
+}
+
+.card:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a{
+  text-decoration: none;
+}
+.text-white{
+  color:white
+}
+.file_icons>i{
+  font-size: 15px;
+  cursor: pointer;
+}
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.file_icons>i:hover .tooltiptext {
+  visibility: visible;
+}
+.blending_input{
+  background-color: #3a4042;
+  color: white;
+  border-radius: 3px;
+  border: white 1px solid;
+  width:140px;
+}
+.pl-35{
+  padding-left: 1em;
+}

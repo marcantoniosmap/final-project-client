@@ -1,0 +1,13 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: beige;
+}
+
+.nav-items{
+    width: 50%;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+
+}

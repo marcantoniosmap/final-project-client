@@ -1,0 +1,33 @@
+{
+    "_id": {
+        "$oid": "5ed7da890cecacd545c2768b"
+    },
+    "owner_id": "owner",
+    "title": "VANILLA TEMPLATE",
+    "description": "THIS IS VANILLA TEMPLATE",
+    "projectType": "vanilla",
+    "source": [{
+        "filename":"/package.json",
+        "type":"file",
+        "code":"{\r\n    \"name\": \"vanilla\",\r\n    \"version\": \"1.0.0\",\r\n    \"description\": \"My vanilla project\",\r\n    \"keywords\": [\r\n      \"react\",\r\n      \"starter\"\r\n    ],\r\n    \"main\": \"/index.js\",\r\n    \"dependencies\": {\r\n\r\n    },\r\n    \"devDependencies\": {\r\n    },\r\n    \"browserslist\": [\r\n      \">0.2%\",\r\n      \"not dead\",\r\n      \"not ie <= 11\",\r\n      \"not op_mini all\"\r\n    ]\r\n  }"
+    },
+    {
+        "filename":"/index.js",
+        "type":"file",
+        "code":"// insert your script here"
+    },
+    {
+        "filename":"/index.html",
+        "type":"file",
+        "code":"<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>"
+    },
+    {
+        "filename":"/style.css",
+        "type":"file",
+        "code":"*{\r\n    margin:0;\r\n}"
+    }
+],
+    "__v": {
+        "$numberInt": "0"
+    }
+}

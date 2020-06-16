@@ -19,7 +19,7 @@ function Profile(props){
         headers: { 'Content-Type': 'application/json', 
                     'auth-token': props.token},
         };
-        const response = await fetch('http://CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/user', requestOptions);
+        const response = await fetch('https://auth.cogether.me/api/user', requestOptions);
         const data = await response.json();
         setUserData(data);
     }

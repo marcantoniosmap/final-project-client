@@ -21,7 +21,7 @@ class Upload extends Component {
             const data = new FormData();
             data.append( 'image', this.state.selectedFile, this.state.selectedFile.name );
             console.log(data);
-            axios.post( 'http://localhost:8000/api/profile/profile-img-upload/',data, {
+            axios.post( 'https://auth.cogether.me/api/profile/profile-img-upload/',data, {
                 headers: {
                     'accept': 'application/json',
                     'Accept-Language': 'en-US,en;q=0.8',

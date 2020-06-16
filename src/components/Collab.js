@@ -17,7 +17,7 @@ function Collab(props){
                     'auth-token': props.token},
           body: JSON.stringify({ project_id: props.match.params.id, sharedPassword:props.match.params.password})
         };
-        const response = await fetch('http://CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/userProject/collab', requestOptions);
+        const response = await fetch('https://auth.cogether.me/api/userProject/collab', requestOptions);
         const data = await response.json();
         if (response.status===200){
             console.log(response.status);
@@ -32,7 +32,7 @@ function Collab(props){
         headers: { 'Content-Type': 'application/json', 
                     'auth-token': token},
         };
-        const response = await fetch(`http://CogetherProject-env.eba-hmw9hpih.ap-southeast-1.elasticbeanstalk.com/api/project/detail/${id}`, requestOptions);
+        const response = await fetch(`https://project.cogether.me/api/project/detail/${id}`, requestOptions);
         const data = await response.json();
         if (data.user._id===props.user){
             setOwnProject(true);

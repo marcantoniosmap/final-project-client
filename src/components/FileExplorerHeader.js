@@ -26,7 +26,7 @@ function FileExplorerHeader(props){
                 fileName:openedPath })
         };
         try{
-            const response = await fetch(`CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/project/deleteObject`, requestOptions)
+            const response = await fetch(`https://auth.cogether.me/api/project/deleteObject`, requestOptions)
             // delete files[openedPath];
             // props.sandpack.openedPath='/index.js';
             props.refetch(openedPath);
@@ -52,7 +52,7 @@ function FileExplorerHeader(props){
                 fileName:input })
         };
         try{
-            const response = await fetch(`http://CogetherProject-env.eba-hmw9hpih.ap-southeast-1.elasticbeanstalk.com/api/project/createObject`, requestOptions)
+            const response = await fetch(`https://project.cogether.me/api/project/createObject`, requestOptions)
             setOpen(false);
             setInput("");
             setFileType("");

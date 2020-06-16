@@ -16,7 +16,7 @@ function ChooseProjectForm(props){
                                 description :description, 
                                 projectType:props.projectType})
         };
-        const response = await fetch('http://CogetherProject-env.eba-hmw9hpih.ap-southeast-1.elasticbeanstalk.com/api/project/create', requestOptions);
+        const response = await fetch('https://project.cogether.me/api/project/create', requestOptions);
         const data = await response.json();
         if (response.status===200){
             props.history.push(`/project/${data.project._id}`);

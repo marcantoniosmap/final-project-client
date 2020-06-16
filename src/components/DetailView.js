@@ -57,7 +57,7 @@ function DetailView(props){
             headers: { 'Content-Type': 'application/json', 
                         'auth-token': props.token},
             };
-            const response = await fetch(`http://CogetherProject-env.eba-hmw9hpih.ap-southeast-1.elasticbeanstalk.com/api/project/delete/${props.id}`, requestOptions);
+            const response = await fetch(`https://project.cogether.me/api/project/delete/${props.id}`, requestOptions);
             const data = await response.json();
             if (!data.status==='ok'){
                 console.log('cannot delete projects');
@@ -70,7 +70,7 @@ function DetailView(props){
             headers: { 'Content-Type': 'application/json', 
                         'auth-token': props.token},
             };
-            const response = await fetch(`http://CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/userProject/leave/${props.id}`, requestOptions);
+            const response = await fetch(`https://auth.cogether.me/api/userProject/leave/${props.id}`, requestOptions);
             const data = await response.json();
             if (!data.status==='ok'){
                 console.log('cannot delete projects');

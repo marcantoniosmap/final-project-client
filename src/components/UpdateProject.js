@@ -17,7 +17,7 @@ function UpdateProject({data,token,closeModalReload,collab}){
                         'auth-token': useToken},
             body: JSON.stringify({ _id: dataId, title:title,description:description})
             };
-            const response = await fetch(`http://localhost:9000/api/project/updateProject`, requestOptions);
+            const response = await fetch(`https://project.cogether.me/api/project/updateProject`, requestOptions);
             const data = await response.json();
             console.log(data);
             if (data.status==='OK'){

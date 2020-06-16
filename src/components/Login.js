@@ -35,6 +35,9 @@ export default function Login(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password:password})
     };
+    console.log(email,password);
+    console.log(requestOptions);
+    console.log('hai its me mario');
     const response = await fetch('CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/user/login', requestOptions);
     const data = await response.json();
     

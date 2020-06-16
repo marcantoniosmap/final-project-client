@@ -30,7 +30,7 @@ export default function Register(props) {
       headers: { 'Content-Type': 'application/json',  'Accept': 'application/json'},
       body: JSON.stringify({ name:name, email: email, password:password})
     };
-    const response = await fetch('CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/user/register', requestOptions);
+    const response = await fetch('http://CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/user/register', requestOptions);
     const data = await response.json();
     console.log(data);
 

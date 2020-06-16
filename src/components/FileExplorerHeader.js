@@ -52,7 +52,7 @@ function FileExplorerHeader(props){
                 fileName:input })
         };
         try{
-            const response = await fetch(`http://localhost:8000/api/project/createObject`, requestOptions)
+            const response = await fetch(`http://CogetherProject-env.eba-hmw9hpih.ap-southeast-1.elasticbeanstalk.com/api/project/createObject`, requestOptions)
             setOpen(false);
             setInput("");
             setFileType("");

@@ -25,7 +25,7 @@ function Project(props){
                     'auth-token': props.token},
         };
         try{
-            const response = await fetch('CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/userProject', requestOptions);
+            const response = await fetch('http://CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/userProject', requestOptions);
             const data = await response.json();
             data.sort((a,b)=>(a.projectType>b.projectType) ? 1:-1);
             setProjects(data);

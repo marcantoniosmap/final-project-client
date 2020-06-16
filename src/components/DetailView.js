@@ -73,7 +73,7 @@ function DetailView(props){
             const response = await fetch(`https://auth.cogether.me/api/userProject/leave/${props.id}`, requestOptions);
             const data = await response.json();
             if (!data.status==='ok'){
-                console.log('cannot delete projects');
+                console.log('cannot leave projects');
             }
             closeModalReload();
     }
@@ -85,7 +85,7 @@ function DetailView(props){
             headers: { 'Content-Type': 'application/json', 
                         'auth-token': token},
             };
-            const response = await fetch(`http://localhost:9000/api/project/detail/${id}`, requestOptions);
+            const response = await fetch(`https://project.cogether.me/api/project/detail/${id}`, requestOptions);
             const data = await response.json();
             if (props.user===data.user._id) setOwner(true);
             setDetailData(data.project);

@@ -120,7 +120,7 @@ function DetailView(props){
                      </ul>
                      <p className="text-break"><b>Sharable link </b> 
                      <button className='btn btn-sm btn-warning'onClick={() => 
-                        {navigator.clipboard.writeText(`http://localhost:3000/collab/${detailData._id}/${detailData.sharedPassword}`)}}
+                        {navigator.clipboard.writeText(`https://cogether.me/collab/${detailData._id}/${detailData.sharedPassword}`)}}
                         >Copy sharable Link</button>
                      </p>
 
@@ -144,8 +144,8 @@ function DetailView(props){
                     }
                     
                   
-                 {deleteBox && <AreYouSure command ={'delete'}handleEvent={handleDelete}/>}
-                 {leaveBox  && <AreYouSure command ={'leave'}handleEvent={handleLeave}/>}
+                 {deleteBox && <AreYouSure text={"Are you sure you want to delete project?"}command ={'delete'}handleEvent={handleDelete}/>}
+                 {leaveBox  && <AreYouSure text={"Are you sure you want to leave project?"}command ={'leave'}handleEvent={handleLeave}/>}
                 </div>
             </div>
         </div>

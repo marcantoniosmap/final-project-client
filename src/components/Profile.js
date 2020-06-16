@@ -13,30 +13,44 @@ function Profile(props){
       return true;
       }
 
-    async function fetchData(){
+    async function fetchData(id){
         const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 
                     'auth-token': props.token},
         };
-        const response = await fetch('https://auth.cogether.me/api/user', requestOptions);
+        const response = await fetch(`https://auth.cogether.me/api/user/${id}`, requestOptions);
         const data = await response.json();
         setUserData(data);
     }
     useEffect(()=>{
-       fetchData();
+       fetchData(props.user);
     },[]);
     return(
         <div>
             <Navbar {...props}/>
-            {isEmpty(userData)? <div>Loading</div>
-            :
-            <div className="container">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"/> 
-                <p>{userData.name}</p>
+             {!isEmpty(userData) ?
+            <div className="container" style={{height:'100vh'}}>
+                <div className=" h-100 d-flex justify-content-center align-items-center">
+                    <div className="card p-3">
+                        <div className='card-body'>
+                            <h3 className="card-title">Profile</h3>
+                            <p className="card-text"><b>Name</b>: {userData.name}</p>
+                            <p className="card-text"><b>Email </b>: {userData.email}</p>
+                            <p className="card-text"><b>Project owned </b>: {userData.email}</p>
+                            <p className="card-text"><b>Project collaborated </b>: {userData.email}</p>
+                        </div>
+                        <div className='card-footer'>
+                            <button className="mx-2 btn-primary btn"> Edit</button>
+                            <button className="mx-2 btn-warning btn"> Change Password</button>
+                            <button className="mx-2 btn-danger btn"> Delete account</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            }
-
+        : <div>loading</div>
+        }
+            {/* !projectId ? <div>loading</div>:<Redirect to={{pathname:`/project/${projectId}`}}/> */}
         </div>
     )
 }

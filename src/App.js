@@ -66,7 +66,7 @@ function App() {
         <Route
           path ="/profile"
           render ={props=>(auth.getAuth()? 
-            <Profile {...props} activeLink="profile" token={auth.getAuthToken()}/>
+            <Profile {...props} user={auth.userId} activeLink="profile" token={auth.getAuthToken()}/>
             : <Redirect to={{pathname:"/login"}}/>
             )}
           />

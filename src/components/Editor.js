@@ -61,6 +61,7 @@ function Editor(props) {
     const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 
+    'Accept': 'application/json',
                 'auth-token': props.token}
     };
     try{

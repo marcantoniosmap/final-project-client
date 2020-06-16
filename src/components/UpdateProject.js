@@ -12,7 +12,8 @@ function UpdateProject({data,token,closeModalReload,collab}){
     async function handleSubmit(event){
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 
+            headers: { 'Content-Type': 'application/json',
+                        'Accept': 'application/json', 
                         'auth-token': useToken},
             body: JSON.stringify({ _id: dataId, title:title,description:description})
             };

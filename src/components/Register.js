@@ -27,7 +27,7 @@ export default function Register(props) {
     event.preventDefault();
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',  'Accept': 'application/json'},
       body: JSON.stringify({ name:name, email: email, password:password})
     };
     const response = await fetch('CogetherAuth-env.eba-3vhu2w8q.ap-southeast-1.elasticbeanstalk.com/api/user/register', requestOptions);

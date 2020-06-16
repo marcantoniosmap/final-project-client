@@ -19,6 +19,7 @@ function FileExplorerHeader(props){
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json',
+                      'Accept': 'application/json',
                      'auth-token': props.token},
           body: JSON.stringify({
                 _id: props.projectId,

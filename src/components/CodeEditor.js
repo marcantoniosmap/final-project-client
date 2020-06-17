@@ -4,7 +4,7 @@ import MonacoEditor from 'react-monaco-editor';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import sharedb from 'sharedb/lib/client';
 
-const socket = new ReconnectingWebSocket('ws://localhost:9001');
+const socket = new ReconnectingWebSocket('ws://collab.cogether.me');
 const connection = new sharedb.Connection(socket);
 
 const CodeEditor = ({ sandpack, project_id }) => {
@@ -32,15 +32,26 @@ const CodeEditor = ({ sandpack, project_id }) => {
     const offset = e.changes[0].rangeOffset;
     const length = e.changes[0].rangeLength;
 
+
     // console.log(e);
     var ops = null;
 
+    // find openedPath index
+    var file_idx = -1;
+    for (var i = 0; i < my_editor.data['file_idx'].length; i++) {
+      if (openedPath === my_editor.data['file_idx'][i]) {
+        file_idx = i;
+        break;
+      }
+    }
+    console.log('FILE INDEX CHANGED', file_idx);
+
     if (newText !== '') {
-      ops = [{ p: [openedPath, 'code', offset], si: newText }];
+      ops = [{ p: ['code', file_idx, offset], si: newText }];
     } else {
       var deleted = files[openedPath].code.substring(offset, offset + length);
       // ops = [{ p: [pathFile,'code', offset], sd: deleted }];
-      ops = [{ p: [openedPath, 'code', offset], sd: deleted }];
+      ops = [{ p: ['code', file_idx, offset], sd: deleted }];
     }
 
     // SUBMIT CHANGES
@@ -60,12 +71,21 @@ const CodeEditor = ({ sandpack, project_id }) => {
     my_editor.subscribe();
     my_editor.on('load', update);
     my_editor.on('op', update);
+  };
 
-    function update() {
-      sandpack.updateFiles({
-      ...my_editor.data,
-      });
-    };
+  function update() {
+    var new_data = transformJson(my_editor.data);
+    console.log('YEA');
+    sandpack.updateFiles({
+      ...new_data,
+    });
+    function transformJson(content) {
+      var dic = {};
+      for (var i = 0; i < content['file_idx'].length; i++) {
+        dic[content['file_idx'][i]] = { "code": content['code'][i] };
+      }
+      return dic;
+    }
   };
 
   const fileOpened = (files) => {
@@ -73,26 +93,12 @@ const CodeEditor = ({ sandpack, project_id }) => {
   };
 
   useEffect(() => {
-    // const doc = connection.get(project_id, openedPath);
-    // console.log('BBB');
-    // doc.subscribe();
-    // my_editor.on('load', update);
-    // my_editor.on('op', update);
-
-    // function update() {
-    //   sandpack.updateFiles({
-    //     ...sandpack.files,
-    //     [my_editor.data.filename]: {
-    //       code: my_editor.data.code,
-    //     }
-    //   });
-    // }
-  }, [openedPath]);
+  });
 
 
   return (
     <MonacoEditor
-      width="100%"
+      width="800"
       height="100%"
       language={fileLanguage(openedPath)}
       theme="vs-dark"

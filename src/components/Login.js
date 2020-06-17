@@ -69,7 +69,7 @@ export default function Login(props) {
         </div> 
         <div className=" col-lg-6 d-flex justify-content-center align-items-center">
           <div className="Login px-5">
-          <h1 className="text-center">Cogether</h1>
+          <h1 className="text-center"> <img src="logo.png" style={{maxWidth:'55px'}}/>Cogether</h1>
           {
             !errorMessage ?
             <p className="text-center">Code together, forever </p>

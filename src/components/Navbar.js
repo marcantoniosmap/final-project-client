@@ -6,12 +6,12 @@ import $ from 'jquery'
 function Navbar(props){
 
     useEffect(()=>{
-        $('#'+props.activeLink).addClass('active');
+        $('#'+props.activeLink).addClass('active','text-primary');
 
     })
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <img className="nav-brand" src="logo.png" style={{maxHeight:'70px'}}/>
+            <img className="nav-brand" src="logo.png" style={{maxHeight:'50px'}}/>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>

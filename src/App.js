@@ -5,12 +5,11 @@ import Project from './components/Project';
 import Logout from './components/Logout'
 import Login from './components/Login';
 import Register from './components/Register';
-import Upload from './components/Upload';
 import Create from './components/Create'
 import Profile from './components/Profile'
 import Auth from './components/Auth';
 import Collab from './components/Collab';
-import "./stylesheet/resizable.css";
+import './stylesheet/custom.scss';
 function App() {
 
 

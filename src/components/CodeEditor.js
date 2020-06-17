@@ -4,7 +4,7 @@ import MonacoEditor from 'react-monaco-editor';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import sharedb from 'sharedb/lib/client';
 
-const socket = new ReconnectingWebSocket('ws://collab.cogether.me');
+const socket = new ReconnectingWebSocket('wss://collab.cogether.me');
 const connection = new sharedb.Connection(socket);
 
 const CodeEditor = ({ sandpack, project_id }) => {

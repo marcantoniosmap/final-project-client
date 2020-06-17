@@ -10,7 +10,7 @@ const connection = new sharedb.Connection(socket);
 const CodeEditor = ({ sandpack, project_id }) => {
   // not sure if this is how to do it properly
   const { files, openedPath } = sandpack;
-  const my_editor = connection.get('project', 'test1');
+  const my_editor = connection.get('cogether', project_id);
   // my_editor.subscribe()
 
   // read more about react states
@@ -38,8 +38,8 @@ const CodeEditor = ({ sandpack, project_id }) => {
 
     // find openedPath index
     var file_idx = -1;
-    for (var i = 0; i < my_editor.data['file_idx'].length; i++) {
-      if (openedPath === my_editor.data['file_idx'][i]) {
+    for (var i = 0; i < my_editor.data[0]['file_idx'].length; i++) {
+      if (openedPath === my_editor.data[0]['file_idx'][i]) {
         file_idx = i;
         break;
       }
@@ -47,11 +47,11 @@ const CodeEditor = ({ sandpack, project_id }) => {
     console.log('FILE INDEX CHANGED', file_idx);
 
     if (newText !== '') {
-      ops = [{ p: ['code', file_idx, offset], si: newText }];
+      ops = [{ p: [ 0, 'code', file_idx, offset], si: newText }];
     } else {
       var deleted = files[openedPath].code.substring(offset, offset + length);
       // ops = [{ p: [pathFile,'code', offset], sd: deleted }];
-      ops = [{ p: ['code', file_idx, offset], sd: deleted }];
+      ops = [{ p: [ 0, 'code', file_idx, offset], sd: deleted }];
     }
 
     // SUBMIT CHANGES
@@ -69,6 +69,7 @@ const CodeEditor = ({ sandpack, project_id }) => {
 
   const editorDidMount = (editor, monaco) => {
     my_editor.subscribe();
+    console.log(my_editor);
     my_editor.on('load', update);
     my_editor.on('op', update);
   };
@@ -81,8 +82,8 @@ const CodeEditor = ({ sandpack, project_id }) => {
     });
     function transformJson(content) {
       var dic = {};
-      for (var i = 0; i < content['file_idx'].length; i++) {
-        dic[content['file_idx'][i]] = { "code": content['code'][i] };
+      for (var i = 0; i < content[0]['file_idx'].length; i++) {
+        dic[content[0]['file_idx'][i]] = { "code": content[0]['code'][i] };
       }
       return dic;
     }

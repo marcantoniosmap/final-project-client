@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar'
-import pic from '../images/login.gif'
+import pic from '../images/collaborate.jpg'
 
 function Collab(props){
 
@@ -57,40 +57,13 @@ function Collab(props){
     }
   
     return(
-        // <div>
-        //     <Navbar {...props}/>
-        //      {project ?
-        //     <div className="container" style={{height:'100vh'}}>
-        //         <div className=" h-100 d-flex justify-content-center align-items-center">
-        //             <div className="card p-3">
-        //                 <div className='card-body'>
-        //                     <h3 className="card-title">{!ownProject ? 'You have been invited to this project': 'You own this project'}</h3>
-        //                     <p className="card-text"><b>Title</b>: {project.project.title}</p>
-        //                     <p className="card-text"><b>description </b>: {project.project.description}</p>
-        //                     <p className="card-text"><b>owner name</b>: {project.user.name}</p>
-        //                     <p className="card-text"><b>{!ownProject && 'Other' } Collaborator</b> :</p>
-        //                     <CollabList list={project.collaborator}/>
-        //                     {!ownProject?
-        //                     <button className='btn btn-primary'onClick={checkCollab}>Collaborate!</button>
-        //                     : <Link to='/'>back to project page</Link>
-        //                     }
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // : <div>loading</div>
-        // }
-        //     {/* !projectId ? <div>loading</div>:<Redirect to={{pathname:`/project/${projectId}`}}/> */}
-        // </div>
-        <div className="container-fluid height-max">
+        <div className="container-fluid height-max" style={{overflow:'hidden'}}>
         <div className="row h-100">
-          <div className="col-lg-6 p-0 overflow-none">
-            <img src={pic} className="h-100"/>
+          <div className="col-lg-6 p-0 d-lg-block d-none">
+            <img src={pic} className="w-100"/>
           </div> 
           <div className=" col-lg-6 d-flex justify-content-center align-items-center">
             <div className="Login px-5">
-            <h1 className="text-center">Cogether</h1>
-
             {project ?
             <div>
                <h3 className="card-title">{!ownProject ? 'You have been invited to this project': 'You own this project'}</h3>

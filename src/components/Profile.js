@@ -2,7 +2,8 @@ import React, { useState, useEffect} from 'react';
 import Navbar from './Navbar';
 import AreYouSure from '../components/AreYouSure';
 import { Button, FormGroup, FormControl} from "react-bootstrap";
-
+import pic from '../images/profile.jpg';
+import {Link } from 'react-router-dom';
 
 function Profile(props){
 
@@ -127,9 +128,13 @@ function Profile(props){
     },[]);
     return(
         <div>
-            <Navbar {...props}/>
-             {!isEmpty(userData) ?
-            <div className="container" style={{height:'100vh'}}>
+            {/* <Navbar {...props}/> */}
+            <div className="container-fluid height-max" style={{overflow:'hidden'}}>
+        <div className="row h-100">
+          <div className=" col-lg-6 d-flex justify-content-center align-items-center">
+            <div className="Login px-5">
+            {!isEmpty(userData) ?
+            <div className="container">
                 <div className=" h-100 d-flex justify-content-center align-items-center">
                     {
                         !changePassword ?
@@ -194,11 +199,24 @@ function Profile(props){
                     }   
 
                 </div>
+                <p className="text-center">
+                <Link to='/'>Back to main menu</Link>   
+                </p> 
             </div>
         : <div>loading</div>
         }
            {deleteBox && <AreYouSure text={"Are you sure you want to delete account?"} command ={'delete'} handleEvent={handleDelete}/>}
         </div>
+  
+          </div>
+          <div className="col-lg-6 p-0 d-lg-block d-none">
+            <img src={pic} className="w-100"/>
+          </div> 
+        </div>
+        </div>
+      </div>
+
+            
     )
 }
 

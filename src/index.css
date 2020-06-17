@@ -71,3 +71,6 @@ a{
 .strike{
   text-decoration: line-through;
 }
+.overflow-none{
+  overflow: hidden;
+}

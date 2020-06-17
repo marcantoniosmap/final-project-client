@@ -11,6 +11,9 @@ function ChooseProject(props){
     function onClickReact(){
         setProjectType("react");
     }
+    function onClickVue(){
+        setProjectType("vue");
+    }
 
     return(
         <div>
@@ -41,11 +44,13 @@ function ChooseProject(props){
                 </div>
 
                 <div className="col-lg-4">
-                    <div className="card" style={{width:'100%', height:'400px',overflow:'hidden'}}>
-                        <img className="card-img-top" src='upload.png' alt="Card image cap"/>
+                    <div className="card" onClick={onClickVue} style={{width:'100%', minHeight:'400px',overflow:'hidden'}}>
+                        <img className="card-img-top" src='vue.png' alt="Card cap"/>
                         <div className="card-body">
-                            <h5 className="card-title">Upload your Own</h5>
-                            <p className="card-text">Click here to upload your current progress</p>
+                            <h5 className="card-title">Vue js</h5>
+                            <p className="card-text">Create vue project, simple and ready!</p>
+                            {projectType==='vue' &&<ChooseProjectForm {...props} projectType={projectType}/>}
+
                         </div>
                     </div>
                 </div>

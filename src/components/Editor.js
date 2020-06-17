@@ -65,7 +65,7 @@ function Editor(props) {
                 'auth-token': props.token}
     };
     try{
-      const response = await axios(`http://localhost:9001/getFromShareDB/${props.match.params.id}`, requestOptions);
+      const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
       // const response = await axios(`http://localhost:9000/api/project/read/${props.match.params.id}`, requestOptions);
       projectEntryList(response.data.projectType);
       setProjectId(props.match.params.id);
@@ -120,11 +120,11 @@ fetchData();
             <FileExplorer style={{ width: "180px", resize:"horizontal",width:"unset", minWidth:"180px", height:"100%"}}>
               </FileExplorer>
             </div>
-            {/* <SandpackConsumer>
+            <SandpackConsumer>
               {sandpack => {
                 return <CodeEditor project_id ={projectId} sandpack={sandpack} style={{ flex: 1, border: "1px solid black", overflowX: "hidden", resize:"both"}} />
               }}
-            </SandpackConsumer> */}
+            </SandpackConsumer>
             <BrowserPreview style={{ flex: 1, border: "1px solid black", overflowX: "hidden", resize:"horizontal",width:"unset", minWidth:"180px"}} />
           </div>
       </SandpackProvider>

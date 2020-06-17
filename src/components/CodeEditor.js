@@ -4,14 +4,14 @@ import MonacoEditor from 'react-monaco-editor';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import sharedb from 'sharedb/lib/client';
 
-const socket = new ReconnectingWebSocket('ws://localhost:9001');
+const socket = new ReconnectingWebSocket('ws://collab.cogether.me');
 const connection = new sharedb.Connection(socket);
 
-const CodeEditor = ({ sandpack,project_id }) => {
+const CodeEditor = ({ sandpack, project_id }) => {
   // not sure if this is how to do it properly
   const { files, openedPath } = sandpack;
-  // const [rdoc,setRdoc]=useState(null);
-  const editorRef = useRef();
+  const my_editor = connection.get('project', 'test1');
+  // my_editor.subscribe()
 
   // read more about react states
   const languages = {
@@ -28,47 +28,64 @@ const CodeEditor = ({ sandpack,project_id }) => {
     return languages[file];
   };
   const onChange = (newValue, e) => {
-    const pathFile = sandpack.openedPath;
-
-    // console.log(e.changes[0].range); contains columns and rows
     const newText = e.changes[0].text;
     const offset = e.changes[0].rangeOffset;
     const length = e.changes[0].rangeLength;
 
-    // console.log(e);
 
+    // console.log(e);
     var ops = null;
 
+    // find openedPath index
+    var file_idx = -1;
+    for (var i = 0; i < my_editor.data['file_idx'].length; i++) {
+      if (openedPath === my_editor.data['file_idx'][i]) {
+        file_idx = i;
+        break;
+      }
+    }
+    console.log('FILE INDEX CHANGED', file_idx);
+
     if (newText !== '') {
-      ops = [{ p: ['code', offset], si: newText }];
+      ops = [{ p: ['code', file_idx, offset], si: newText }];
     } else {
       var deleted = files[openedPath].code.substring(offset, offset + length);
       // ops = [{ p: [pathFile,'code', offset], sd: deleted }];
-      ops = [{ p: ['code', offset], sd: deleted }];
+      ops = [{ p: ['code', file_idx, offset], sd: deleted }];
     }
 
-    const doc = connection.get(project_id, openedPath);
-
-    doc.fetch(function(err){
+    // SUBMIT CHANGES
+    my_editor.submitOp(ops, function(err) {
       if (err) throw err;
     });
 
-    // submit change
-
-    doc.submitOp(ops, function(err) {
-      if (err) throw err;
-    });;
-
     sandpack.updateFiles({
       ...sandpack.files,
-      [pathFile]: {
+      [openedPath]: {
         code: newValue,
       },
     });
   };
 
   const editorDidMount = (editor, monaco) => {
+    my_editor.subscribe();
+    my_editor.on('load', update);
+    my_editor.on('op', update);
+  };
 
+  function update() {
+    var new_data = transformJson(my_editor.data);
+    console.log('YEA');
+    sandpack.updateFiles({
+      ...new_data,
+    });
+    function transformJson(content) {
+      var dic = {};
+      for (var i = 0; i < content['file_idx'].length; i++) {
+        dic[content['file_idx'][i]] = { "code": content['code'][i] };
+      }
+      return dic;
+    }
   };
 
   const fileOpened = (files) => {
@@ -76,21 +93,7 @@ const CodeEditor = ({ sandpack,project_id }) => {
   };
 
   useEffect(() => {
-    const doc = connection.get(project_id, openedPath);
-    console.log('BBB');
-    doc.subscribe();
-    doc.on('load', update);
-    doc.on('op', update);
-
-    function update() {
-      sandpack.updateFiles({
-        ...sandpack.files,
-        [doc.data.filename]: {
-          code: doc.data.code,
-        }
-      });
-    }
-  }, [openedPath]);
+  });
 
 
   return (

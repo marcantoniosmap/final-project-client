@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProjectList from './ProjectList'
 import Navbar from './Navbar';
-import {DropdownButton,Dropdown} from 'react-bootstrap'
+import ReactLoading from 'react-loading'
 
 function Project(props){
     const [load,setLoad]=useState(false);
@@ -46,15 +46,10 @@ function Project(props){
             <Navbar {...props}/>
             <div className="container">
                 <div className='d-flex justify-content-center'>
-                        <h1 className="text-center p-4">Projects</h1>
-                        <DropdownButton id="dropdown-item-button-Info" className="d-flex align-items-center" title="Sort it based on">
-                            <Dropdown.Item as="button">Action</Dropdown.Item>
-                            <Dropdown.Item as="button">Another action</Dropdown.Item>
-                            <Dropdown.Item as="button">Something else</Dropdown.Item>
-                        </DropdownButton>
+                    <h1 className="text-center p-4">Projects</h1>
                 </div>
                 {!load 
-                ? <div>Loading...</div> 
+                ? <ReactLoading  color={'blue'} height={'20%'} width={'20%'} />
                 :<ProjectList {...props} projects= {projects} reFetch={reFetch}/>}  
 
         </div>

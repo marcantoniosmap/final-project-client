@@ -48,9 +48,6 @@ function DetailView(props){
         setDeleteBox(false);
         if (answer) deleteObject();
     }
-    function parseDate(dateObj){
-        return dateObj.getUTCDate();
-    }
     async function deleteObject(){
         const requestOptions = {
             method: 'DELETE',
@@ -95,6 +92,18 @@ function DetailView(props){
         }fetchData(props.id,props.token);
 
     },[]);
+
+    
+    function CollabList(props){
+        const list= props.list;
+
+        const listCollab = list.map(collab=>
+            <li key={collab._id}>{collab.email}</li>
+        );
+        return(
+            <ul>{listCollab}</ul>
+        )
+    }
     return(
         <div className="modal fade" id="modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" aria-hidden="true" >
             <div className="modal-dialog modal-dialog-centered" role="document"> 
@@ -113,10 +122,8 @@ function DetailView(props){
                       <p><b>Owner Name</b> : {user.name}</p>
                       <p><b>Collaborator</b>: </p>
                       <ul>
-                     { collaborator.map((collab)=>(
-                         props.user ===collab &&<li key={collab}>{collab.email}</li>
-                        ))
-                     }                
+                        <CollabList list={collaborator}/>
+         
                      </ul>
                      <p className="text-break"><b>Sharable link </b> 
                      <button className='btn btn-sm btn-warning'onClick={() => 
@@ -130,7 +137,7 @@ function DetailView(props){
                     </div>
                     <div className="modal-footer">
                         {
-                            owner ?  <div><button type="button" onClick={HandleDeleteBox} className="btn btn-danger" >Delete</button>
+                            owner ?  <div><button type="button" onClick={HandleDeleteBox} className="mx-2 btn btn-danger" >Delete</button>
                             <button type="button" onClick={HandleEdit} className="btn btn-secondary" >Edit</button></div>
                             : <button type="button" onClick={HandleLeaveBox} className="btn btn-secondary" >Leave</button>
 

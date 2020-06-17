@@ -10,6 +10,7 @@ export default function Register(props) {
   const [passwordVerify, setPasswordVerify]=useState("");
   const [name,setName]= useState("");
   const [valid,setValid]= useState(false);
+  const [errorMessage,setErrorMessage]=useState(false);
 
   function validateForm() {
     return name.length> 0 && email.length > 0 && password.length > 0;
@@ -30,22 +31,18 @@ export default function Register(props) {
       headers: { 'Content-Type': 'application/json',  'Accept': 'application/json'},
       body: JSON.stringify({ name:name, email: email, password:password})
     };
-    const response = await fetch('https://auth.cogether.me/api/user/register', requestOptions);
-    const data = await response.json();
-    console.log(data);
-
     try{
-      if (data.status==='success'){
+      const response = await fetch('https://auth.cogether.me/api/user/register', requestOptions);
+      if (response.ok){
+        const data = await response.json();
         props.history.push('/login');
       }
-        else{
-          console.log("error else");
-          alert(data);
-        }
-      
+      else{
+        setErrorMessage('Error in register, read again your input');
+      }
   }catch(err){
-    console.log("error catch");
-    alert(err);
+    setErrorMessage('Error in register, read again your input');
+
   }
 
 
@@ -61,7 +58,13 @@ export default function Register(props) {
         <div className=" col-lg-6 d-flex justify-content-center align-items-center">
           <div className="Login px-5">
           <h1 className="text-center">Cogether</h1>
-          <p className="text-center">Register today for free, forever!</p>
+          {
+            !errorMessage ?
+            <p className="text-center">Register today for free, forever!</p>
+            : 
+            <p className="text-center" style={{color:'red'}}>{errorMessage}</p>
+
+          }
             <form onSubmit={handleSubmit}>
             <FormGroup controlId="name">
                 Name

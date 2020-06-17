@@ -16,13 +16,18 @@ function ChooseProjectForm(props){
                                 description :description, 
                                 projectType:props.projectType})
         };
-        const response = await fetch('https://project.cogether.me/api/project/create', requestOptions);
-        const data = await response.json();
-        if (response.status===200){
-            props.history.push(`/project/${data.project._id}`);
-        }else{
-            console.log("Failed to create");
+        try{
+            const response = await fetch('https://project.cogether.me/api/project/create', requestOptions);
+            const data = await response.json();
+            if (response.status===200){
+                props.history.push(`/project/${data.project._id}`);
+            }else{
+                console.log("Failed to create");
+            }
+        }catch(err){
+            props.hhistory.push('/');
         }
+       
       }
     
     function validateForm() {

@@ -10,7 +10,6 @@ import Create from './components/Create'
 import Profile from './components/Profile'
 import Auth from './components/Auth';
 import Collab from './components/Collab';
-// import {Resizable,ResizableBox} from 'react-resizable';
 import "./stylesheet/resizable.css";
 function App() {
 
@@ -26,8 +25,8 @@ function App() {
     auth.signout();
   }
 
-
   return (
+
     <Router>
       <Switch>
         <Route 
@@ -66,7 +65,7 @@ function App() {
         <Route
           path ="/profile"
           render ={props=>(auth.getAuth()? 
-            <Profile {...props} user={auth.userId} activeLink="profile" token={auth.getAuthToken()}/>
+            <Profile {...props} user={auth.userId} handleLogOut={handleLogOut} activeLink="profile" token={auth.getAuthToken()}/>
             : <Redirect to={{pathname:"/login"}}/>
             )}
           />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Button, FormGroup, FormControl} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import "../stylesheet/login.css";
@@ -8,6 +8,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [login,setLogin]= useState(false);
   const [store,setStore]= useState("");
+  const [errorMessage,setErrorMessage]=useState(false);
 
 
   function validateForm() {
@@ -21,12 +22,13 @@ export default function Login(props) {
       setStore(store);
     }
   }
-  function logout(){
-    setLogin(false);
-    setStore("");
-    localStorage.removeItem("login");
-  }
-
+  useEffect(function() {
+   console.log("mounted");
+    
+    return function cleanup() {
+      console.log("unmounted");
+    }
+  }, []);
 
   async function handleSubmit (event){
     event.preventDefault();
@@ -35,17 +37,26 @@ export default function Login(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password:password})
     };
-    const response = await fetch('https://auth.cogether.me/api/user/login', requestOptions);
-    const data = await response.json();
+    try{
+      const response = await fetch('https://auth.cogether.me/api/user/login', requestOptions);
+      if(response.ok){
+        const data = await response.json();
+        localStorage.setItem('login', JSON.stringify({
+          login:true,
+          token: data.token,
+          id:data.id
+        }));
+        storeCollector();
+        props.handleSucessfulAuth(data);
+        props.history.push('/');
+      }
+      else{
+        setErrorMessage('Error in logging in');
+      }
+    }catch(err){
+      setErrorMessage('Error in logging in');
+    }
     
-    localStorage.setItem('login', JSON.stringify({
-      login:true,
-      token: data.token,
-      id:data.id
-    }))
-    storeCollector();
-    props.handleSucessfulAuth(data);
-    props.history.push('/');
 
   }
 
@@ -59,8 +70,13 @@ export default function Login(props) {
         <div className=" col-lg-6 d-flex justify-content-center align-items-center">
           <div className="Login px-5">
           <h1 className="text-center">Cogether</h1>
-        
-          <p className="text-center">You are {props.loggedInStatus}</p>
+          {
+            !errorMessage ?
+            <p className="text-center">Code together, forever </p>
+            : 
+            <p className="text-center" style={{color:'red'}}>{errorMessage}</p>
+
+          }
             <form onSubmit={handleSubmit}>
               <FormGroup controlId="email">
                 Email

@@ -38,6 +38,7 @@ function Collab(props){
             setOwnProject(true);
         }
         setProject(data);
+        console.log(data);
     }
     useEffect(()=>{
         fetchData(props.match.params.id,props.token);
@@ -66,11 +67,7 @@ function Collab(props){
                             <p className="card-text"><b>Title</b>: {project.project.title}</p>
                             <p className="card-text"><b>description </b>: {project.project.description}</p>
                             <p className="card-text"><b>owner name</b>: {project.user.name}</p>
-                            <p className="card-text"><b>Other collaborator</b> :</p>
-                            {/* <ul>
-                                {project.collaborator.map(collab=>
-                                    <li key={collab._id}>{collab.email}</li>)}
-                            </ul> */}
+                            <p className="card-text"><b>{!ownProject && 'Other' } Collaborator</b> :</p>
                             <CollabList list={project.collaborator}/>
                             {!ownProject?
                             <button className='btn btn-primary'onClick={checkCollab}>Collaborate!</button>

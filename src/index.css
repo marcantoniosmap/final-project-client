@@ -63,3 +63,11 @@ a{
 .pl-35{
   padding-left: 1em;
 }
+
+.react-monaco-editor-container{
+  overflow: hidden;
+}
+
+.strike{
+  text-decoration: line-through;
+}

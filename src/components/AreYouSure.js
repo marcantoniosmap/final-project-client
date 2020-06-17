@@ -21,7 +21,7 @@ function AreYouSure(props){
 
     }
     function closeModal(){
-        props.handleDelete(false);
+        props.handleEvent(false);
         $('#modal-sure').modal('hide');
 
     }

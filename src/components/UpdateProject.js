@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import {FormGroup, FormControl} from "react-bootstrap";
-
+import $ from 'jquery'
 
 function UpdateProject({data,token,closeModalReload,collab}){
     const [useToken,setUseToken]=useState(token);
     const [dataId,setDataId]= useState(data._id);
     const [title,setTitle]=useState(data.title);
     const [description,setDescription]=useState(data.description);
+    const [deletedCollaborator,setDeletedCollaborator]=useState([]);
 
 
     async function handleSubmit(event){
@@ -15,7 +16,7 @@ function UpdateProject({data,token,closeModalReload,collab}){
             headers: { 'Content-Type': 'application/json',
                         'Accept': 'application/json', 
                         'auth-token': useToken},
-            body: JSON.stringify({ _id: dataId, title:title,description:description})
+            body: JSON.stringify({ _id: dataId, title:title,description:description,deletedCollab:deletedCollaborator})
             };
             const response = await fetch(`https://project.cogether.me/api/project/updateProject`, requestOptions);
             const data = await response.json();
@@ -23,6 +24,16 @@ function UpdateProject({data,token,closeModalReload,collab}){
             if (data.status==='OK'){
                 closeModalReload();
             }
+    }
+    function deleteCollab(id){
+
+        if ($('#'+id).hasClass('strike')){
+            var index = deletedCollaborator.indexOf(id);
+            if (index !== -1) deletedCollaborator.splice(index, 1);
+        }else{
+            deletedCollaborator.push(id)
+        }
+        $('#'+id).toggleClass('strike');
     }
 
     return(
@@ -54,7 +65,7 @@ function UpdateProject({data,token,closeModalReload,collab}){
             
                 {collab.map((collabrated)=>(
                     <div>
-                        <i className="fa fa-times" style={{color:'red'}}></i><span key ={collabrated.id}>{collabrated.email}</span>
+                        <i onClick={e=>deleteCollab(collabrated._id)}className="fa fa-times" style={{color:'red'}}></i><span id={collabrated._id} key ={collabrated._id} >{collabrated.email}</span>
                     </div>
                 ))}
             

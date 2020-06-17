@@ -219,7 +219,6 @@ function Editor(props) {
     'Accept': 'application/json',
                 'auth-token': props.token}
     };
-    console.log(props.token);
     try{
       const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
       // const response = await axios(`http://localhost:9000/api/project/read/${props.match.params.id}`, requestOptions);

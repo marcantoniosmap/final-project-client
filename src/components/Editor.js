@@ -223,8 +223,8 @@ function Editor(props) {
     };
     console.log(props.token);
     try{
-      // const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
-      const response = await axios(`http://localhost:9001/getFromShareDB/${props.match.params.id}`, requestOptions);
+      const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
+      // const response = await axios(`http://localhost:9001/getFromShareDB/${props.match.params.id}`, requestOptions);
       projectEntryList(response.data.projectType);
       setProjectId(props.match.params.id);
       getFile(response.data.source);

@@ -20,7 +20,6 @@ function UpdateProject({data,token,closeModalReload,collab}){
             };
             const response = await fetch(`https://project.cogether.me/api/project/updateProject`, requestOptions);
             const data = await response.json();
-            console.log(data);
             if (data.status==='OK'){
                 closeModalReload();
             }

@@ -182,17 +182,19 @@ function Editor(props) {
       dic[content[i].filename] = {code:content[i].code};
       }catch(err){
         dic[content[i].filename] = {code:''};
-
       }
-      
     }
     setFiles(dic);    
   }
 
   function projectEntryList(projectType){
-    if (projectType==="vanilla"){
-      setProjectEntry("/index.js");
-    }else{
+    if (projectType === "vanilla") {
+      setProjectEntry("/src/index.js");
+    } 
+    if (projectType === "vue") {
+      setProjectEntry("/src/main.js")
+    } 
+    if (projectType === "react") {
       setProjectEntry("/src/index.js");
     }
 
@@ -219,9 +221,10 @@ function Editor(props) {
     'Accept': 'application/json',
                 'auth-token': props.token}
     };
+    console.log(props.token);
     try{
-      const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
-      // const response = await axios(`http://localhost:9000/api/project/read/${props.match.params.id}`, requestOptions);
+      // const response = await axios(`https://collab.cogether.me/getFromShareDB/${props.match.params.id}`, requestOptions);
+      const response = await axios(`http://localhost:9001/getFromShareDB/${props.match.params.id}`, requestOptions);
       projectEntryList(response.data.projectType);
       setProjectId(props.match.params.id);
       getFile(response.data.source);
@@ -238,9 +241,9 @@ function Editor(props) {
     }
   }
 }
+
   useEffect(()=>{
-fetchData();
-    
+    fetchData();
 },[]);
       
   

@@ -21,6 +21,7 @@ const CodeEditor = ({ sandpack, project_id }) => {
     "ts": "typescript",
     "tsx": "typescript",
     "json": "json",
+    "vue": "vue",
   };
 
   const fileLanguage = (openedPath) => {
@@ -75,8 +76,9 @@ const CodeEditor = ({ sandpack, project_id }) => {
   };
 
   function update() {
+    console.log(my_editor.data);
     var new_data = transformJson(my_editor.data);
-    console.log('YEA');
+    console.log(new_data);
     sandpack.updateFiles({
       ...new_data,
     });
